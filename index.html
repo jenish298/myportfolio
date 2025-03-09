@@ -819,7 +819,7 @@ button {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => response.ok)
             .then(data => {
                 if (data.success) {
                     messageBox.textContent = "Your message has been sent successfully!";
