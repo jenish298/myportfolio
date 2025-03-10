@@ -766,7 +766,7 @@ button {
           </div>
 
           <div class="col-lg-7">
-         <form action="https://formsubmit.co/ajax/jenishbhadani9@gmail.com" method="POST" class="php-email-form">
+         <form action="https://formsubmit.co/ajax/jenishbhadani9@gmail.com" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table"> 
 
@@ -790,48 +790,12 @@ button {
         <div class="col-md-12 text-center">
             <div class="loading" style="display:none;">Loading...</div>
             <button type="submit">Send Message</button>
-            <div class="sent-message" style="display:none; color: green;">✅ Message has been sent. Thank you!</div>
-            <div class="error-message" style="display:none; color: red;">❌ There was an error sending your message. Please try again.</div>
+<!--             <div class="sent-message" style="display:none; color: green;">✅ Message has been sent. Thank you!</div> -->
+<!--             <div class="error-message" style="display:none; color: red;">❌ There was an error sending your message. Please try again.</div> -->
         </div>
     </div>
 </form>
 
-<script>
-document.querySelector('.php-email-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop normal form submission (we handle it via AJAX)
-
-    let form = this;
-    let formData = new FormData(form);
-    let loading = form.querySelector('.loading');
-    let sentMessage = form.querySelector('.sent-message');
-    let errorMessage = form.querySelector('.error-message');
-
-    loading.style.display = 'block';
-    sentMessage.style.display = 'none';
-    errorMessage.style.display = 'none';
-
-    fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: { "Accept": "application/json" } // Required for AJAX response
-    })
-    .then(response => response.json()) // Parse JSON response
-    .then(data => {
-        loading.style.display = 'none';
-        if (data.success) {
-            sentMessage.style.display = 'block'; // ✅ Show success message
-            form.reset(); // Reset form after successful submission
-        } else {
-            errorMessage.style.display = 'block'; // ❌ Show error message
-        }
-    })
-    .catch(error => {
-        console.error("Fetch Error:", error); // Debugging
-        loading.style.display = 'none';
-        errorMessage.style.display = 'block'; // ❌ Show error message
-    });
-});
-</script>
 
 
 
