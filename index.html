@@ -799,7 +799,7 @@ button {
             </form>
             <p id="form-message" class="message" style="color: green; font-weight: bold;"></p>
           </div>
-		<script>
+	<script>
     document.getElementById("contact-form").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent default form submission
         
@@ -813,22 +813,27 @@ button {
                 "Accept": "application/json" // Ensures AJAX processing
             }
         })
-        .then(response => response.json())
+        .then(response => response.json()) // Parse JSON response
         .then(data => {
+            console.log("Server Response:", data); // Debugging
             if (data.success) {
                 document.getElementById("form-message").innerHTML = "✅ Your message has been sent successfully!";
+                document.getElementById("form-message").style.color = "green";
                 form.reset(); // Clear form after submission
             } else {
                 document.getElementById("form-message").innerHTML = "❌ Error! Please try again.";
                 document.getElementById("form-message").style.color = "red";
             }
         })
-        .catch(() => {
+        .catch(error => {
+            console.error("Fetch Error:", error); // Debugging
             document.getElementById("form-message").innerHTML = "❌ There was an error sending your message. Please try again.";
             document.getElementById("form-message").style.color = "red";
         });
     });
-</script>
+</script>	
+   
+
           
           <!-- Optionally include a script for handling form states (loading, success, error messages) -->
           
