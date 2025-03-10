@@ -808,36 +808,80 @@ button {
 
       </div>
       <script>
-        document.getElementById("contact-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent page reload
 
-            let form = this;
-            let formData = new FormData(form);
-            let messageBox = document.getElementById("form-message");
+document.getElementById("contact-form").add EventListener("submit", function(event) {
 
-            fetch("https://formsubmit.co/jenishbhadani9@gmail.com", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.ok)
-            .then(data => {
-                if (data.success) {
-                    messageBox.textContent = "Your message has been sent successfully!";
-                    messageBox.className = "message success";
-                    form.reset(); // Reset the form after successful submission
-                } else {
-                    messageBox.textContent = "Error sending message. Please try again.";
-                    messageBox.className = "message error";
-                }
-                messageBox.style.display = "block";
-            })
-            .catch(() => {
-                messageBox.textContent = "Something went wrong. Please try again later.";
-                messageBox.className = "message error";
-                messageBox.style.display = "block";
-            });
-        });
-    </script>
+event.preventDefault(); //
+
+Prevent page reload
+
+let form = this;
+
+let formData = new
+
+FormData(form);
+
+let messageBox =
+
+document.getElementById("form-message");
+
+fetch("https://formsubmit.co/jenishbhadani9 @gmail.com", {
+
+method: "POST",
+
+body: formData
+
+})
+
+then (response => {
+
+if (response.ok) {
+
+messageBox.textContent
+
+= "Your message has been sent successfully!";
+
+messageBox.className =
+
+"message success";
+
+form.reset(); // Reset
+
+the form after successful submission
+
+} else {
+
+throw new Error("Error
+
+sending message");
+
+}
+
+})
+
+.catch(() => {
+
+messageBox.textContent =
+
+"Something went wrong. Please try again later.";
+
+messageBox.className =
+
+"message error";
+
+})
+
+.finally(() => {
+
+messageBox.style.display =
+
+"block";
+
+});
+
+});
+
+</script>
 
     </section><!-- /Contact Section -->
 
