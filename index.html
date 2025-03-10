@@ -766,7 +766,7 @@ button {
           </div>
 
           <div class="col-lg-7">
-            <form action="https://formsubmit.co/jenishbhadani9@gmail.com" method="POST" id="contact-form">
+            <form id="contact-form">
 
               <div class="row gy-4">
                 <div class="col-md-6">
@@ -797,26 +797,25 @@ button {
                 </div>
               </div>
             </form>
-            <p id="form-message" class="message"></p>
+            <p id="form-message" class="message" style="color: green; font-weight: bold;"></p>
           </div>
 		<script>
     document.getElementById("contact-form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-
+        event.preventDefault(); // Prevent normal form submission
+        
         let form = this;
         let formData = new FormData(form);
 
-        fetch(form.action, {
-            method: form.method,
+        fetch("https://formsubmit.co/jenishbhadani9@gmail.com", {
+            method: "POST",
             body: formData
         })
         .then(response => {
             if (response.ok) {
                 document.getElementById("form-message").innerHTML = "✅ Your message has been sent successfully!";
-                document.getElementById("form-message").style.color = "green";
-                form.reset(); // Reset form after successful submission
+                form.reset(); // Clear form after submission
             } else {
-                document.getElementById("form-message").innerHTML = "❌ There was an error sending your message. Please try again.";
+                document.getElementById("form-message").innerHTML = "❌ Error! Please try again.";
                 document.getElementById("form-message").style.color = "red";
             }
         })
