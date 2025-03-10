@@ -790,26 +790,50 @@ button {
         <div class="col-md-12 text-center">
             <div class="loading" style="display:none;">Loading...</div>
             <button type="submit">Send Message</button>
-            <div class="sent-message" style="display:none; color: green; margin-top:5%;">✅ Message has been sent. Thank you!</div>
-            <div class="error-message" style="display:none; color: red; margin-top:5%;">❌ There was an error sending your message. Please try again.</div>
+            <div class="sent-message" style="display:none; color: green; margin-top:5%;"> Message has been sent. Thank you!</div>
+            <div class="error-message" style="display:none; color: red; margin-top:5%;"> There was an error sending your message. Please try again.</div>
         </div>
     </div>
 </form>
-		  <script>
-            document.querySelector('.php-email-form').addEventListener('submit', function(event) {
-              
-              let form = this;
-              form.querySelector('.loading').style.display = 'block';
-             form.querySelector('.error-message').style.display = 'none';
-              form.querySelector('.sent-message').style.display = 'none';
-          
-              // Simulate form submission (you can replace this with actual form submission logic)
-              setTimeout(function() {
-                form.querySelector('.loading').style.display = 'none';
-                form.querySelector('.sent-message').style.display = 'block'; // Show sent message
-              }, 2000); // Simulate a delay of 2 seconds
-            });
-          </script>
+
+<script>
+document.querySelector('.php-email-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Stop default form submission
+
+    let form = this;
+    let formData = new FormData(form);
+    let loading = form.querySelector('.loading');
+    let sentMessage = form.querySelector('.sent-message');
+    let errorMessage = form.querySelector('.error-message');
+
+    // Show loading animation
+    loading.style.display = 'block';
+    sentMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+
+    // Send form data using fetch
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+    })
+    .then(response => response.json()) // Convert response to JSON
+    .then(data => {
+        loading.style.display = 'none';
+        if (data.success) {
+            sentMessage.style.display = 'block'; //  Show success message
+            form.reset(); // Reset form fields
+        } else {
+            errorMessage.style.display = 'block'; //  Show error message
+        }
+    })
+    .catch(error => {
+        console.error("Fetch Error:", error);
+        loading.style.display = 'none';
+        errorMessage.style.display = 'block'; // ❌ Show error message
+    });
+});
+</script>
 
 
 
